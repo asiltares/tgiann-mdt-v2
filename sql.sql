@@ -1,0 +1,37 @@
+﻿-- QBCore için oyuncu tablosuna sütun ekleme (varsa eklemez, yoksa ekler)
+ALTER TABLE `players` ADD COLUMN IF NOT EXISTS `aranma` MEDIUMTEXT DEFAULT '[]';
+ALTER TABLE `players` ADD COLUMN IF NOT EXISTS `photo` MEDIUMTEXT NULL;
+
+-- Arananlar tablosu
+CREATE TABLE IF NOT EXISTS `tgiann_mdt_arananlar` (
+  `citizenid` VARCHAR(50) DEFAULT NULL,
+  `sebep` LONGTEXT DEFAULT NULL,
+  `baslangic` VARCHAR(255) DEFAULT NULL,
+  `bitis` VARCHAR(255) DEFAULT NULL,
+  `isim` VARCHAR(255) DEFAULT NULL,
+  `img` LONGTEXT DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Ceza geçmişi tablosu
+CREATE TABLE IF NOT EXISTS `tgiann_mdt_cezalar` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `citizenid` VARCHAR(50) DEFAULT NULL,
+  `aciklama` LONGTEXT DEFAULT NULL,
+  `ceza` VARCHAR(255) DEFAULT NULL,
+  `polis` MEDIUMTEXT DEFAULT NULL,
+  `zanli` MEDIUMTEXT DEFAULT NULL,
+  `cezalar` LONGTEXT DEFAULT NULL,
+  `olayid` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+-- Olay geçmişi tablosu
+CREATE TABLE IF NOT EXISTS `tgiann_mdt_olaylar` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `aciklama` LONGTEXT DEFAULT NULL,
+  `polis` MEDIUMTEXT DEFAULT NULL,
+  `zanli` MEDIUMTEXT DEFAULT NULL,
+  `zaman` VARCHAR(50) DEFAULT CURRENT_TIMESTAMP(),
+  `esyalar` MEDIUMTEXT DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
