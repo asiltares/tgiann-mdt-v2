@@ -7,7 +7,6 @@ if not Config.AllowedJobs then
     Config = require('config')
 end
 
--- LOG FONKSİYONU
 local function SendLog(title, desc, color, data)
     if not Config.Logs or not Config.Logs.enabled or not Config.Logs.webhook or Config.Logs.webhook == "" then return end
     local embed = {
@@ -107,7 +106,6 @@ local function translateGender(gender)
     return "Bilinmiyor"
 end
 
--- DISCORD ID ÇEKME
 local function GetDiscord(source)
     for _, id in ipairs(GetPlayerIdentifiers(source)) do
         if id:find("discord:") then
@@ -138,7 +136,6 @@ QBCore.Functions.CreateCallback("tgiann-mdtv2:sorgula", function(source, cb, dat
     end
 
     if data.tip == "isim" then
-        -- >>> ARANMA SÜTUNU EKLENDİ
         exports.oxmysql:execute('SELECT citizenid, charinfo, job, money, aranma FROM players', {}, function(result)
             local matches = {}
             for _, row in ipairs(result) do
@@ -159,8 +156,6 @@ QBCore.Functions.CreateCallback("tgiann-mdtv2:sorgula", function(source, cb, dat
                     else
                         row.bank = 0
                     end
-                    -- aranma olduğu gibi dönüyor (string/json)
-                    -- NUI normalize edecek
                     table.insert(matches, row)
                 end
             end
@@ -182,7 +177,6 @@ QBCore.Functions.CreateCallback("tgiann-mdtv2:sorgula", function(source, cb, dat
         end)
 
     elseif data.tip == "numara" then
-        -- >>> ARANMA SÜTUNU EKLENDİ
         exports.oxmysql:execute('SELECT citizenid, charinfo, job, money, aranma FROM players', {}, function(result)
             local matches = {}
             for _, row in ipairs(result) do
@@ -203,7 +197,6 @@ QBCore.Functions.CreateCallback("tgiann-mdtv2:sorgula", function(source, cb, dat
                     else
                         row.bank = 0
                     end
-                    -- aranma aynen ekli
                     table.insert(matches, row)
                 end
             end
@@ -211,7 +204,6 @@ QBCore.Functions.CreateCallback("tgiann-mdtv2:sorgula", function(source, cb, dat
         end)
 
     elseif data.tip == "plaka" then
-        -- >>> players.aranma da JOIN ile alındı
         exports.oxmysql:execute(
             [[SELECT player_vehicles.*, players.charinfo, players.money, players.aranma
               FROM player_vehicles
@@ -248,7 +240,6 @@ QBCore.Functions.CreateCallback("tgiann-mdtv2:sorgula", function(source, cb, dat
                     else
                         row.bank = 0
                     end
-                    -- row.aranma zaten seçimde var
                 end
                 cb(result)
             end
@@ -265,8 +256,6 @@ QBCore.Functions.CreateCallback("tgiann-mdtv2:photo", function(source, cb, data)
         end
     end)
 end)
-
--- ... DEVAMI (diğer callback/eventler aynen senin kodunda)
 
 RegisterNetEvent('tgiann-mdtv2:ceza-kaydet', function(data)
     local src = source
