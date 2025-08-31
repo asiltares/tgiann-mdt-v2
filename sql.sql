@@ -1,8 +1,6 @@
-﻿-- QBCore için oyuncu tablosuna sütun ekleme (varsa eklemez, yoksa ekler)
-ALTER TABLE `players` ADD COLUMN IF NOT EXISTS `aranma` MEDIUMTEXT DEFAULT '[]';
+﻿ALTER TABLE `players` ADD COLUMN IF NOT EXISTS `aranma` MEDIUMTEXT DEFAULT '[]';
 ALTER TABLE `players` ADD COLUMN IF NOT EXISTS `photo` MEDIUMTEXT NULL;
 
--- Arananlar tablosu
 CREATE TABLE IF NOT EXISTS `tgiann_mdt_arananlar` (
   `citizenid` VARCHAR(50) DEFAULT NULL,
   `sebep` LONGTEXT DEFAULT NULL,
@@ -12,7 +10,6 @@ CREATE TABLE IF NOT EXISTS `tgiann_mdt_arananlar` (
   `img` LONGTEXT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Ceza geçmişi tablosu
 CREATE TABLE IF NOT EXISTS `tgiann_mdt_cezalar` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `citizenid` VARCHAR(50) DEFAULT NULL,
@@ -25,7 +22,6 @@ CREATE TABLE IF NOT EXISTS `tgiann_mdt_cezalar` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
--- Olay geçmişi tablosu
 CREATE TABLE IF NOT EXISTS `tgiann_mdt_olaylar` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `aciklama` LONGTEXT DEFAULT NULL,
